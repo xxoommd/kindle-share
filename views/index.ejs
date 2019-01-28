@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>仅供测试用...</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let i = 0; i < books.length; i++) { %>
+      <tr>
+        <th scope="row">
+          <%= (i+1) %>
+        </th>
+        <td>
+          <%= books[i].name %>
+        </td>
+        <td>
+          <a href=<%=books[i].link%> >下载</a>
+        </td>
+      </tr>
+      <% }%>
+    </tbody>
+  </table>
+</body>
+
+</html>
