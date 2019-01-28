@@ -34,6 +34,8 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Name</th>
+          <th scope="col">Type</th>
+          <th scope="col">Size</th>
           <th scope="col">Download</th>
         </tr>
       </thead>
@@ -45,6 +47,12 @@
           </th>
           <td>
             <%= books[i].name %>
+          </td>
+          <td>
+            <%= books[i].type %>
+          </td>
+          <td>
+            <%= books[i].size %>
           </td>
           <td>
             <a href=<%=books[i].link%> >下载</a>

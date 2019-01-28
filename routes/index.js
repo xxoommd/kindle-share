@@ -5,6 +5,31 @@ const path = require('path')
 
 const validExt = ['.txt', '.epub', '.mobi', '.pdf', '.doc', '.docx']
 
+function formatFileSize(bytes) {
+    if (bytes >= 1024) {
+        let kb = bytes / 1024
+        if (kb >= 1024) {
+            let mb = kb / 1024
+            if (mb >= 1024) {
+                let gb = mb / 1024
+                return `${gb.toFixed(2)} GB`
+            } else {
+                return `${mb.toFixed(2)} MB`
+            }
+        } else {
+            return `${kb.toFixed(1)} KB`
+        }
+    } else {
+        return `${bytes} Bytes`
+    }
+}
+
+function getFileSize(filename) {
+  const stats = fs.statSync(filename)
+  const fileSizeInBytes = stats["size"]
+  return formatFileSize(fileSizeInBytes)
+}
+
 /* GET home page. */
 router.get('/', function(req, res) {
   let files = fs.readdirSync(global.__bookdir)
@@ -14,6 +39,8 @@ router.get('/', function(req, res) {
   const list = files.map(book => {
     return {
       name: path.basename(book),
+      type: path.extname(book),
+      size: getFileSize(path.join(global.__bookdir, book)),
       link: `books/${encodeURIComponent(book)}`
     }
   })
