@@ -7,7 +7,6 @@ const validExt = ['.txt', '.epub', '.mobi', '.pdf', '.doc', '.docx']
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  const prefix = process.env.STATIC_PREFIX
   let files = fs.readdirSync(path.join(global.__rootdir, 'public', 'books'))
 
   files = files.filter(book => validExt.includes(path.extname(book)))
@@ -15,14 +14,13 @@ router.get('/', function(req, res, next) {
   const list = files.map(book => {
     return {
       name: path.basename(book),
-      link: `${prefix}/books/${encodeURIComponent(book)}`
+      link: `books/${encodeURIComponent(book)}`
     }
   })
 
   let data = {
     title: 'Kindle Share',
-    books: list,
-    prefix: prefix
+    books: list
   }
 
   res.render('index', data);

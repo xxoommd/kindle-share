@@ -39,6 +39,5 @@ app.use(function(err, req, res, next) {
 })
 
 global.__rootdir = __dirname
-console.log('prefix:', process.env.STATIC_PREFIX)
 
 module.exports = app
