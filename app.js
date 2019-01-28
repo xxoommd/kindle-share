@@ -7,6 +7,7 @@ const logger = require('morgan')
 const indexRouter = require('./routes/index')
 
 const app = express()
+app.enable('trust proxy')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -17,7 +18,7 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use('/kindle', express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
 
@@ -38,5 +39,6 @@ app.use(function(err, req, res, next) {
 })
 
 global.__rootdir = __dirname
+console.log('prefix:', process.env.STATIC_PREFIX)
 
 module.exports = app

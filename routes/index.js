@@ -20,7 +20,8 @@ router.get('/', function(req, res, next) {
 
   let data = {
     title: 'Kindle Share',
-    books: list
+    books: list,
+    prefix: process.env.STATIC_PREFIX
   }
 
   res.render('index', data);
