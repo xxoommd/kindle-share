@@ -14,30 +14,53 @@
     <%= title %>
   </h1>
   <p>仅供测试用...</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Download</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for (let i = 0; i < books.length; i++) { %>
-      <tr>
-        <th scope="row">
-          <%= (i+1) %>
-        </th>
-        <td>
-          <%= books[i].name %>
-        </td>
-        <td>
-          <a href=<%=books[i].link%> >下载</a>
-        </td>
-      </tr>
-      <% }%>
-    </tbody>
-  </table>
+  <form class="md-form" style="height: 50px;" method="POST" action="/upload" enctype="multipart/form-data">
+    <div class="form-row">
+      <div class="col-md-6">
+        <input type="file" name="upload_file" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <input type="text" name="upload_name" class="form-control" placeholder="Rename" value="">
+      </div>
+      <div class="col-md-2">
+        <input class="btn btn-primary" type="submit" value="上传">
+      </div>
+    </div>
+  </form>
+
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let i = 0; i < books.length; i++) { %>
+        <tr>
+          <th scope="row">
+            <%= (i+1) %>
+          </th>
+          <td>
+            <%= books[i].name %>
+          </td>
+          <td>
+            <a href=<%=books[i].link%> >下载</a>
+          </td>
+        </tr>
+        <% }%>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="javascripts/jquery-3.3.1.slim.min.js"></script>
+  <script>
+    $(document).ready(() => {
+      console.log('--- ready ---')
+    })
+  </script>
 </body>
 
 </html>

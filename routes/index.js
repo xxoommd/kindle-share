@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const path = require('path')
 const fs = require('fs')
+const path = require('path')
 
 const validExt = ['.txt', '.epub', '.mobi', '.pdf', '.doc', '.docx']
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  let files = fs.readdirSync(path.join(global.__rootdir, 'public', 'books'))
+router.get('/', function(req, res) {
+  let files = fs.readdirSync(global.__bookdir)
 
   files = files.filter(book => validExt.includes(path.extname(book)))
 
@@ -25,5 +25,26 @@ router.get('/', function(req, res, next) {
 
   res.render('index', data);
 });
+
+router.post('/upload', (req, res) => {
+  console.log('req.body: ', req.body)
+  console.log('req.files: ', req.files)
+  let file = req.files.upload_file
+  if (!file) {
+    res.redirect('/')
+    return
+  }
+
+  let rename = req.body.upload_name || file.name
+  rename += path.extname(file.name)
+  console.log('--- rename to:', rename)
+  let newpath = path.join(global.__bookdir, rename)
+  console.log('--- newpath to:', newpath)
+  file.mv(newpath, err => {
+
+  })
+
+  res.redirect('/')
+})
 
 module.exports = router;
