@@ -35,16 +35,23 @@ router.post('/upload', (req, res) => {
     return
   }
 
-  let rename = req.body.upload_name || file.name
-  rename += path.extname(file.name)
+  let rename
+  if (req.body.upload_name.length > 0) {
+    rename = req.body.upload_name + path.extname(file.name)
+  } else {
+    rename = file.name
+  }
+
   console.log('--- rename to:', rename)
   let newpath = path.join(global.__bookdir, rename)
   console.log('--- newpath to:', newpath)
   file.mv(newpath, err => {
-
+    if (err) {
+      console.error('move file failed:', err.message)
+    }
   })
 
-  res.redirect('/')
+  res.redirect('.')
 })
 
 module.exports = router;
