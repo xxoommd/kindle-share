@@ -3,7 +3,7 @@ const router = express.Router()
 const fs = require('fs')
 const path = require('path')
 
-const validExt = ['.txt', '.epub', '.mobi', '.pdf', '.doc', '.docx', 'azw']
+const validExt = ['.txt', '.epub', '.mobi', '.pdf', '.doc', '.docx', '.azw', '.ppt', '.pptx']
 
 function formatFileSize(bytes) {
     if (bytes >= 1024) {
